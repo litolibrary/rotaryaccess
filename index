@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title></title>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+<link rel="icon" href="">
+<link rel="stylesheet" type="text/css" href="rotary.css">
+</head>
+<body>
+	<style type="text/css">
+
+body.offcanvas-active{
+	overflow:hidden;
+}
+
+.offcanvas-header{ display:none; }
+
+.screen-darken{
+	height: 100%;
+	width:0%;
+	z-index: 30;
+	position: fixed;
+	top: 0;
+	right: 0;
+	opacity:0;
+	visibility:hidden;
+	background-color: rgba(34, 34, 34, 0.6);
+	transition:opacity .2s linear, visibility 0.2s, width 2s ease-in;
+}
+
+.screen-darken.active{
+	z-index:10; 
+	transition:opacity .3s ease, width 0s;
+    opacity:1;
+    width:100%;
+    visibility:visible;
+}
+
+/* ============ mobile view ============ */
+@media all and (max-width: 991px) {
+	
+	.offcanvas-header{ display:block; }
+
+	.mobile-offcanvas{
+		visibility: hidden;
+		transform:translateX(-50%);
+	    border-radius:0; 
+		display:block;
+	    position: fixed;
+	    top: 0; left:0;
+	    height: 100%;
+	    z-index: 1200;
+	    width:80%;
+	    overflow-y: scroll;
+	    overflow-x: hidden;
+	    transition: visibility .3s ease-in-out, transform .3s ease-in-out;
+	}
+
+	.mobile-offcanvas.show{
+		visibility: visible;
+    	transform: translateX(0);
+	}
+	.mobile-offcanvas .container, .mobile-offcanvas .container-fluid{
+		display: block;
+	}
+
+}	
+/* ============ mobile view .end// ============ */
+</style>
+
+<script type="text/javascript">
+
+	function darken_screen(yesno){
+		if( yesno == true ){
+			document.querySelector('.screen-darken').classList.add('active');
+		}
+		else if(yesno == false){
+			document.querySelector('.screen-darken').classList.remove('active');
+		}
+	}
+	
+	function close_offcanvas(){
+		darken_screen(false);
+		document.querySelector('.mobile-offcanvas.show').classList.remove('show');
+		document.body.classList.remove('offcanvas-active');
+	}
+
+	function show_offcanvas(offcanvas_id){
+		darken_screen(true);
+		document.getElementById(offcanvas_id).classList.add('show');
+		document.body.classList.add('offcanvas-active');
+	}
+
+	document.addEventListener("DOMContentLoaded", function(){
+		document.querySelectorAll('[data-trigger]').forEach(function(everyelement){
+			
+			let offcanvas_id = everyelement.getAttribute('data-trigger');
+			
+			everyelement.addEventListener('click', function (e) {
+				e.preventDefault();
+	        	show_offcanvas(offcanvas_id);
+	  			
+			});
+		});
+
+		document.querySelectorAll('.btn-close').forEach(function(everybutton){
+			
+			everybutton.addEventListener('click', function (e) {
+				e.preventDefault();
+	        	close_offcanvas();
+	  		});
+		});
+
+		document.querySelector('.screen-darken').addEventListener('click', function(event){
+			close_offcanvas();
+		});
+		
+    }); 
+	// DOMContentLoaded  end
+</script>
+
+</head>
+<body>
+
+<span class="screen-darken"></span>
+
+
+    
+
+	<div class="bg-dark text-end">
+		<button data-trigger="navbar_main" class="d-lg-none navbar-toggler" type="button">  <span class="fa fa-bars" style="color: white; font-size: 30px"></span> </button>
+			
+	</div>
+
+<!-- ============= COMPONENT ============== -->
+<nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-white bg-wite ">
+ <div class="container ">
+ 	
+    <div class="offcanvas-header">  
+		<button class="btn-close float-end" style="background-color: white;"></button>
+	</div>
+   	<a class="navbar-brand" style="color: #ffc107;" href="#">
+		<img src="images/rag logo.jpg" height="40" width="100">
+	</a>
+
+	<ul class="navbar-nav ms-auto">	
+		<li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+		<li class="nav-item"><a href="#" class="nav-link">About Us</a></li>
+		<li class="nav-item"><a href="#" class="nav-link">Investment Plan</a></li>
+		<li class="nav-item"><a href="#" class="nav-link">FAQ</a></li>
+		<li class="nav-item"><a href="#" class="nav-link">News</a></li>
+		<li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+		<li class="nav-item"><a href="#" class="nav-link">Get Started</a></li>
+	</ul>
+
+ </div> <!-- container-fluid.// -->
+</nav>
+	<!-- <nav class="navbar nav">
+		<div class="container-fluid topnav">
+			<div class="container ">
+				<div class="row row1">
+					<div class="col-md-1">
+						<form>
+							<select class="select1">
+								<option selected="">English</option>
+								<option selected="">French</option>
+							</select>
+						</form>
+					</div>
+					<div class="col-md-4">
+						<i class="fa fa-map-marker mx-2" style="color: yellow; font-size: 16px;"></i><span> 430 Grove Street, New York, NY 10013 US.</span>
+					</div>
+					<div class="col-md-3">
+						<i class="fa fa-clock-o mx-2" style="color: yellow; font-size: 16px;"></i><span> Mon - Sat 8.00 - 18.00. Sunday CLOSED</span>
+					</div>
+					<div class="col-md-3">
+						<i class="fa fa-phone mx-2" style="color: yellow; font-size: 16px;"></i><span> Mon - Sat 8.00 - 18.00. Sunday CLOSED</span>
+					</div>
+					<div class="col-md-1">
+						<form>
+							<select class="select2">
+								<option selected="">English</option>
+								<option selected="">French</option>
+							</select>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container mt-4">
+			<div class="row row2">
+				<div class="col-2">
+					<img src="images/rag logo.jpg" width="100%" height="60%">
+				</div>
+				<div class="col-8">
+					<ul class=" list-unstyled  nav-menu">
+						<li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+						<li class="nav-item"><a href="nav-link" class="nav-link">About Us</a></li>
+						<li class="nav-item"><a href="nav-link" class="nav-link">Investment Plan</a></li>
+						<li class="nav-item"><a href="nav-link" class="nav-link">FAQ</a></li>
+						<li class="nav-item"><a href="nav-link" class="nav-link">News</a></li>
+						<li class="nav-item"><a href="nav-link" class="nav-link">Contact</a></li>
+						<li class="nav-item"><a href="nav-link" class="nav-link">Get Started</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2 socials">
+					<a href="#"><i class="fa fa-facebook px-2"></i></a>
+					<a href=""><i class="fa fa-twitter px-2"></i></a>
+					<a href=""><i class="fa fa-instagram px-2"></i></a>
+					<a href=""><i class="fa fa-google px-2"></i></a>
+				</div>
+			</div>
+		</div>
+	</nav> -->
+	
+	<section id="slide">
+		<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+		  <div class="carousel-inner ">
+		    <div class="carousel-item active ">
+		      <img src="images/slide_1-1.jpg" class="d-block w-100" alt="...">
+		       	<div class="carousel-caption caption">
+			     	<h3 class="text-warning text-right h3-text"><b>Award Winning Capital <br>Investment Company</b></h3>
+			     	<h5 class="h5-text">Securing the financial future you deserve you can never be better <br> without us. With dozens of renowed traders we continuously <br> make profit</h5>
+			     	<a href="#" class="btn btn-light text-primary mt-3">Get Started</a>
+		     	</div>
+		    </div>
+		    <div class="carousel-item">
+		      <img src="images/slide_2.jpg" class="d-block w-100" alt="...">
+		      <div class="carousel-caption caption">
+			     	<h3 class="text-warning text-right h3-text"><b>Creating The Wealth You<br>Deserve!</b></h3>
+			     	<h5 class="h5-text">Lets lead you to the path of wealth today; ensuring you secure <br> that dream vacation and house you have always wanted.</h5>
+			     	<a href="#" class="btn btn-light text-primary mt-3">About Us</a>
+		     	</div>
+		    </div>
+		  </div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid bg-warning investment ">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10">
+						<h4 class="text-white">Looking for a Company Offering The Best Scheme To Grow Your Funds?</h4>
+					</div>
+					<div class="col-md-2 mb-5 text-center ">
+						<a href="#" class="btn btn-light btn-hover">Investment Plans <i class="fa fa"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid mt-5 mb-2 ">
+			<div class="row port text-center">
+				<div class="col-md-3 mb-3 ">
+					<i class="fa fa-mouse-pointer mb-3 text-dark" style="font-size: 60px;"></i>
+					<h4 >Sign Up</h4>
+					<h5 class="mt-3">Register an account and fill in necessary information.</h5>
+					
+				</div>
+				<div class="col-md-2 mb-3 ">
+					<i class="fa fa-mouse-pointer mb-3 text-dark" style="font-size: 60px;"></i>
+					<h4 >Fund</h4>
+					<h5 class="mt-3">Fund your wallet directly using our payment method.</h5>
+				</div>
+				<div class="col-md-3 mb-3 ">
+					<i class="fa fa-mouse-pointer mb-3 text-dark" style="font-size: 60px;"></i>
+					<h4 >Invest </h4>
+					<h5 class="mt-3">Invest Preferred amount from your funded wallet.</h5>
+				</div>
+				<div class="col-md-2 mb-3 ">
+					<i class="fa fa-mouse-pointer mb-3 text-dark" style="font-size: 60px;"></i>
+					<h4 >Withdraw </h4>
+					<h5 class="mt-3">Withdraw accrued ROIs to your account instantly.</h5>
+				</div>
+				<div class="col-md-2 mb-3 ">
+					<div class="card card-body cover">
+						<h4>We Provide The Best Investment Plans.</h4>
+						<p><small>Cutting edge investment plans leveraging your funds to yield maximum returns in weeks!</small></p>
+						<a href="" class="mt-3 profile_link">View Profile <i></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid bg-warning video mt-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 gx-4 mb-3">
+						<div class="coln">
+							<img src="images/img2.jpg" width="100%" height="100%" class="img">
+						</div>
+					</div>
+					<div class="col-md-4 mb-4">
+						<div class="coln">
+							<img src="images/vide_bg.jpg" width="100%" height="100%" class="img">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h3 class="text-blue mb-3">Our Trading & Investment Skillsets</h3>
+						<p class="mb-3">Our performance over the past 7 years all summarized, giving this outstanding and superb result. Indeed we are one of the best!</p>
+						<p>FOCUS</p>
+						<div class="progress" style="height: 4px;">
+							<div class="progress-bar bg-dark " style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<p class="mt-4">Discipline & Patience</p class="mt-4">
+						<div class="progress" style="height: 4px;">
+							<div class="progress-bar bg-dark " style="width: 97%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<p class="mt-4"> Mental Toughness</p>
+						<div class="progress" style="height: 4px;">
+							<div class="progress-bar bg-dark " style="width: 90%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<p class="mt-4">Record Keeping</p>
+						<div class="progress" style="height: 4px;">
+							<div class="progress-bar bg-dark " style="width: 87%; transition:  7s;" aria-valuenow="100" aria-valuemin="87" aria-valuemax="100"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid option pt-5 pb-5">
+			<div class="container">
+				<h3 class="text-center text-light mb-4">Investment Plans </h3>
+				<div class="row">
+					<div class="col-md-4 mb-5">
+						<div class="card bg-light">
+							<div class="card-body">
+								<h6 class="text-primary">REGULAR PLAN</h6>
+								<h6 class="mb-3">Investment Amount</h6>
+								<h5 class="text-primary">$2,000 – $9,999</h5>
+								<h6 class="mb-3">Interest</h6>
+								<h5 class="text-primary">10% Daily</h5>
+								<h6 class="mb-3">75% Weekly</h6>
+								<p>Referral Bonus </p>
+								<h6 class="text-primary">10%</h6>
+								<small>of total amount deposited by referral</small>
+								<button class="btn btn-dark text-warning mt-5">Learn more</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-5">
+						<div class="card bg-light">
+							<div class="card-body">
+								<h6 class="text-primary">BRONZE PLAN</h6>
+								<h6 class="mb-3">Investment Amount</h6>
+								<h5 class="text-primary">$10,000 – $19,999</h5>
+								<h6 class="mb-3">Interest</h6>
+								<h5 class="text-primary">12% Daily</h5>
+								<h6 class="mb-3">85% Weekly</h6>
+								<p>Referral Bonus </p>
+								<h6 class="text-primary">10%</h6>
+								<small>of total amount deposited by referral</small>
+								<button class="btn btn-dark text-warning mt-5">Learn more</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-5">
+						<div class="card bg-light">
+							<div class="card-body">
+								<h6 class="text-primary ">REGULAR PLAN</h6>
+								<h6 class="mb-3">Investment Amount</h6>
+								<h5 class="text-primary">0.5 – 10 BTC</h5>
+								<h6 class="mb-3">Interest</h6>
+								<h5 class="text-primary">1.6% – 2% daily</h5>
+								<h6 class="mb-3">55% per week</h6>
+								<p>Hash Rate</p>
+								<h6 class="text-primary mb-3">33 TH/s</h6>
+								<p><small> or more </small></p>
+								<button class="btn btn-dark text-warning mt-4">Learn more</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid bg-dark pt-5 pb-5">
+			<div class="container">
+				<div class="row text-light mb-5">
+					<h5>Better Ideas, Better Investments, More Profits.</h5>
+					<h3>Here is what makes us different<br>from other investment companies.</h3>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="card card-body conCard">
+							<h4  class="text-primary mb-4">Exquisite Dashboard</h4>
+							<h5>Manage multiple investments using our powerful cutting-edge dashboard built on modern technology.</h5>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card card-body conCard">
+							<h4  class="text-primary mb-4">Financial Freedom</h4>
+							<h5>Our customers have since being part of us, became financially free with a steady income source.</h5>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card card-body conCard">
+							<h4 class="text-primary mb-4" >Safe and Secure</h4>
+							<h5>Our Payment gateway is secured with military grade encryption with powerful COMODO SSL.</h5>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="card card-body conCard">
+							<h4  class="text-primary mb-4">Mouthwatering ROI</h4>
+							<h5>ROI offered by Cupid Invest can't be matched by any company while still enjoying our roll-over functionality.</h5>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card card-body conCard">
+							<h4  class="text-primary mb-4">24/7 Client Support</h4>
+							<h5>We have support agents who work around the clock attending to all complaints and inquiries.</h5>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card card-body conCard">
+							<h4 class="text-primary mb-4" >Payment Options</h4>
+							<h5>Cryptocurrency is the best and most secured tender for online transaction which has been embedded.</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid bg-yellow">
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-md-3 py-4">
+						<h1 class="blue"><b>11321</b></h1>
+						<h5 class="blue"><b>executed trade</b></h5>
+						<p class="gray">winners and losers.</p>
+					</div>
+					<div class="col-md-3 py-4 ">
+						<h1 class="blue"><b>7</b></h1>
+						<h5 class="blue"><b>years of experience</b></h5>
+						<p class="gray">trading currencies and assets.</p>
+					</div>
+					<div class="col-md-3 py-4">
+						<h1 class="blue"><b>3</b></h1>
+						<h5 class="blue"><b>awards winning</b></h5>
+						<p class="gray">as a notable brand.</p>
+					</div>
+					<div class="col-md-3 py-4">
+						<h1 class="blue"><b>3425</b></h1>
+						<h5 class="blue"><b>satisfied customers</b></h5>
+						<p class="gray">from all around the world.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid bg-blue">
+			<div class="container py-5">
+				<div class="row">
+					<div class="col-md-6">
+						<h1 class="mb-4 text-white"><b>FAQ</b></h1>
+						<div class="accordion" id="accordionExample">
+						  <div class="accordion-item bg-blue">
+						    <h2 class="accordion-header bg-blue" id="headingOne">
+						      <button class="accordion-button bg-blue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						        What Is Bitcoin ?
+						      </button>
+						    </h2>
+						    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+						      <div class="accordion-body">
+						      		It’s a type of digital currency in which encryption techniques are used to regulate the generation of units of currency and verify the transfer of funds, operating independently of a central bank.
+						      </div>
+						    </div>
+						  </div>
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingTwo">
+						      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						        How To Make A Bitcoin Wallet?
+						      </button>
+						    </h2>
+						    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+						      <div class="accordion-body text-white">
+						        In order to make deposit and withdraw , you need a bitcoin wallet ,to make a bitcoin wallet, register on blockchain.com
+						      </div>
+						    </div>
+						  </div>
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingThree">
+						      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						        How Can I Buy Bitcoins?
+						      </button>
+						    </h2>
+						    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+						      <div class="accordion-body text-white">
+						        You can buy bitcoin from credit card instantly from coinbase also you can buy bitcoin from your country local bitcoin sellers at localbitcoins
+						      </div>
+						    </div>
+						  </div>
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingThree">
+						      <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						        Why Bitcoin?
+						      </button>
+						    </h2>
+						    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+						      <div class="accordion-body text-white">
+						        Because it’s fast , less fee , global and TAX free
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<h1 class="mb-4 text-white"><b>Testimonial</b></h1>
+						<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-inner ">
+						    	<div class="carousel-item active ">
+									<div class="card card-body bg-primary">
+										<div class="row">
+											<div class="col-md-5">
+												<img src="images/testimonial.jpg" height="200px" class="img-fluid">
+											</div>
+											<div class="col-md-7 mb-5 text-light">
+												<p>I had the best investment package specially crafted for me by Cupid Investment, I'm making over $10,000 weekly all thanksto your experience in the business and of-course myself for trusting to embark on this journey with you</p>
+												<h5>Donald Simpson</h5>
+												<h6>Pharmacist</h6>
+
+												<div class="text-end">
+													<i class="fa fa-backward mx-4 p-3 border" onclick="plusSlides(-1)"></i> <i class="fa fa-forward p-3 border" onclick="plusSlides(1)"></i>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item active ">
+									<div class="card card-body bg-primary">
+										<div class="row">
+											<div class="col-md-5">
+												<img src="images/testimonial.jpg" height="200px" class="img-fluid">
+											</div>
+											<div class="col-md-7 mb-5 text-light">
+												<p>I had the best investment package specially crafted for me by Cupid Investment, I'm making over $10,000 weekly all thanksto your experience in the business and of-course myself for trusting to embark on this journey with you</p>
+												<h5>Donald Simpson</h5>
+												<h6>Pharmacist</h6>
+
+												<div class="text-end">
+													<i class="fa fa-backward mx-4 p-3 border"></i> <i class="fa fa-forward p-3 border"></i>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+ 								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid">
+			<div class="container py-5 mb-4">
+				<div class="row">
+					<div class="col-md-8">
+						<h2><b>News & Events</b></h2>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card">
+									<img src="images/news-image2.jpeg" class="card-img-top" style="opacity: 60%">
+									<div class="card-body">
+										<h4 class="mb-4"><a href="#" class="text-decoration-none news-link">House Passes $2.2 trillion Democratic Coronavirus stimulus bill</a></h4>
+										<p>The House passed a $2.2 trillion Democratic coronavirus stimulus plan on Thursday night even as Democrats and the Trump administration struggle to strike a relief deal. </p>
+										<p><i class="fa fa-clock-o"> October 8, 2020</i> <button class="btn btn-outline-primary float-end">Read More</button></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card">
+								    <img src="images/news-image.jpeg" class="card-img-top" style="opacity: 50%;" >
+									<div class="card-body">
+										<h4 class="mb-4"><a href="#" class="text-decoration-none news-link">India's millenials are driving a surge in stock market trading during the pandemic </a></h4>
+										<p>India’s youth population is driving a boon in the country’s investment landscape as millions have been piling into stock trading during the pandemic.  Mirroring trends seen in the </p>
+										<p><i class="fa fa-clock-o"> October 5, 2020</i> <button class="btn btn-outline-primary float-end">Read More</button></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h2><b>Market overview</b></h2>
+						<div class="card">
+							<img src="images/download.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container-fluid bg-dark py-5">
+			<div class="container mx-4">
+				<div class="row">
+					<div class="col-md-8">
+						<h2 class="text-white mb-3">Subscribe to our Newsletter</h2>
+						<h5 class="text-white">Sign up for our weekly industry updates, insider perspectives and in-depth market analysis.</h5>
+					</div>
+					<div class="col-md-4">
+						<form>
+							<div class="form-group ">
+								<input type="email" name="email" class="form-control mb-3" style="border-color: yellow;" placeholder="Your Email Address">
+								<div class="d-grid gap-2">
+									<button class="btn btn-light d-block" type="submit">Send  <i class=" mx-3 fa fa-mouse-pointer"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section></section>
+	<section>
+		<div class="container-fluid bg-blue py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<h3 class="mb-3 text-white">About Company</h3>
+						<hr>
+						<img src="">
+						<p class="text-white">We offer the best investment plan leverage your funds to yield maximum returns in no time.</p>
+						<img src="images/footer.png" class="img-fluid">
+			
+
+					</div>
+					<div class="col-md-3">
+						<h3 class="mb-3 text-white">Recent News</h3>
+						<hr>
+						<a href="#" class="text-decoration-none news_footer text-white">House Passes $2.2 trillion Democratic Coronavirus stimulus bill</a>
+						<p class="my-2"><i class="fa fa-clock-o yellow"> </i> <small style="color: gray; margin-left: 8px;">October 8, 2020</small></p>
+
+						<a href="#" class="text-decoration-none news_footer text-white">India's millenials are driving a surge in stock market trading during the pandemic </a>
+						<p class="my-2"><i class="fa fa-clock-o yellow"> </i> <small style="color: gray; margin-left: 8px;">October 8, 2020</small></p>
+
+						<a href="#" class="text-decoration-none news_footer text-white">Oil prices drop as Trump announces positive test for coronavirus; yen strengthens against dollar</a>
+						<p class="my-2"><i class="fa fa-clock-o yellow"> </i> <small style="color: gray; margin-left: 8px;">October 8, 2020</small></p>
+
+
+					</div>
+					<div class="col-md-3 text-white">
+						<h3 class="mb-3">Get In Touch</h3>
+						<hr>
+						<div class="row mb-3">
+							<div class="col-2">
+								<i class="fa fa-map-marker"></i>
+							</div>
+							<div class="col-10">
+								<span>430 Grove Street, New York, NY 10013 US.</span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-2">
+								<i class="fa fa-map-marker"></i>
+							</div>
+							<div class="col-10">
+								<span>Call +1 (480)-372-2726</span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-2">
+								<i class="fa fa-map-marker"></i>
+							</div>
+							<div class="col-10">
+								<span>Fax: +1 (480)-372-2726</span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-2">
+								<i class="fa fa-map-marker"></i>
+							</div>
+							<div class="col-10">
+								<a href="mailto:support@cupidinvestment.com" class="foot-link">support@cupidinvestment.com</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h3 class="mb-3 text-white">Useful Links</h3>
+						<hr>
+						<div class="row mb-3">
+							<div class="col-6">
+								<ul class="list-unstyled">
+									<li><a href="" class="foot-link">Home</a></li>
+									<li><a href="" class="foot-link">Investment Plans</a></li>
+									<li><a href="" class="foot-link">News</a></li>
+									<li><a href="" class="foot-link">KYC</a></li>
+									<li><a href="" class="foot-link">Disclaimer</a></li>
+								</ul>
+							</div>
+							<div class="col-6">
+								<ul class="list-unstyled">
+									<li><a href="" class="foot-link">About us</a></li>
+									<li><a href="" class="foot-link">FAQ</a></li>
+									<li><a href="" class="foot-link">Contact</a></li>
+									<li><a href="" class="foot-link">Privacy Policy</a></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="bootstrap/js/bootstrap.bundle.js"></script>
+
+</body>
+</html>
